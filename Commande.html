@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RESTO IVOIRE</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f5f5f5;
+}
+
+header{
+background:#b30000;
+color:white;
+text-align:center;
+padding:20px;
+position:relative;
+}
+
+.menu-btn{
+position:absolute;
+right:15px;
+top:15px;
+font-size:24px;
+cursor:pointer;
+}
+
+nav{
+display:flex;
+justify-content:center;
+background:#111;
+}
+
+nav a{
+color:white;
+padding:12px;
+text-decoration:none;
+}
+
+section{
+padding:20px;
+text-align:center;
+}
+
+/* IMAGES */
+
+.scroll{
+display:flex;
+overflow-x:auto;
+gap:10px;
+scroll-behavior:smooth;
+}
+
+.scroll img{
+width:85%;
+height:220px;
+object-fit:cover;
+border-radius:15px;
+flex-shrink:0;
+}
+
+/* MENUS */
+
+.menu-title{
+background:#b30000;
+color:white;
+padding:12px;
+margin-top:12px;
+cursor:pointer;
+border-radius:8px;
+font-weight:bold;
+}
+
+.menu-items{
+display:none;
+background:white;
+padding:10px;
+border-radius:8px;
+margin-top:5px;
+}
+
+.item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin:10px 0;
+gap:10px;
+}
+
+.qty{
+display:flex;
+gap:8px;
+align-items:center;
+}
+
+.qty button{
+padding:5px 12px;
+border:none;
+background:#ddd;
+border-radius:5px;
+cursor:pointer;
+font-size:18px;
+}
+
+.cart{
+background:white;
+padding:15px;
+margin-top:20px;
+border-radius:10px;
+}
+
+.btn{
+background:#25D366;
+color:white;
+padding:12px;
+border-radius:8px;
+border:none;
+cursor:pointer;
+margin-top:10px;
+}
+
+.call{
+background:#007bff;
+color:white;
+padding:12px;
+border-radius:8px;
+text-decoration:none;
+display:inline-block;
+margin-top:10px;
+}
+
+.overlay{
+position:fixed;
+top:0;
+right:-100%;
+width:70%;
+height:100%;
+background:#111;
+color:white;
+transition:0.3s;
+padding:20px;
+z-index:1000;
+}
+
+.overlay h3{
+border-bottom:1px solid #444;
+padding-bottom:10px;
+cursor:pointer;
+}
+
+.close{
+text-align:right;
+font-size:22px;
+cursor:pointer;
+}
+
+#dispoBox,
+#partnersBox{
+display:none;
+background:white;
+color:black;
+padding:10px;
+border-radius:10px;
+margin-top:10px;
+}
+
+textarea{
+width:100%;
+height:80px;
+border-radius:8px;
+padding:10px;
+}
+
+footer{
+background:#111;
+color:white;
+text-align:center;
+padding:15px;
+margin-top:20px;
+}
+
+.two-columns{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.column{
+flex:1;
+min-width:280px;
+background:#fafafa;
+padding:10px;
+border-radius:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>🍽️ RESTO IVOIRE</h1>
+
+<span class="menu-btn" onclick="openMenu()">⋮</span>
+
+</header>
+
+<nav>
+
+<a href="#accueil">Accueil</a>
+<a href="#menu">Menus</a>
+<a href="#contact">Contact</a>
+
+</nav>
+
+<!-- MENU LATÉRAL -->
+
+<div class="overlay" id="overlay">
+
+<div class="close" onclick="closeMenu()">✖</div>
+
+<h3 onclick="showDispo()">🕒 Disponibilité</h3>
+
+<h3 onclick="showPartners()">🏪 Restaurants partenaires</h3>
+
+</div>
+
+<!-- ACCUEIL -->
+
+<section id="accueil">
+
+<p>
+Bienvenue chez RESTO IVOIRE.
+Découvrez des repas africains délicieux,
+des grillades savoureuses,
+des spécialités locales et une livraison rapide.
+</p>
+
+<div class="scroll" id="scroll">
+
+<img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b">
+
+<img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d">
+
+<img src="https://images.unsplash.com/photo-1562967916-eb82221dfb92">
+
+</div>
+
+</section>
+
+<!-- DISPONIBILITÉ -->
+
+<section>
+
+<div id="dispoBox">
+
+<h3>🕒 Disponibilité</h3>
+
+<p>Lundi : 10h30 - 02h20</p>
+<p>Mardi : 11h40 - 03h00</p>
+<p>Mercredi : 14h30 - 02h30</p>
+<p>Jeudi : Fermé</p>
+<p>Vendredi : 10h30 - 03h30</p>
+<p>Samedi : 12h00 - 05h00</p>
+
+</div>
+
+</section>
+
+<!-- PARTENAIRES -->
+
+<section>
+
+<div id="partnersBox">
+
+<h3>🏪 Restaurants partenaires</h3>
+
+<p>Mag</p>
+<p>Bourg</p>
+<p>La Rome</p>
+<p>Lazer Park</p>
+<p>Chez Nous</p>
+
+</div>
+
+</section>
+
+<!-- MENUS -->
+
+<section id="menu">
+
+<h2>Nos Menus</h2>
+
+<!-- SPA -->
+
+<div class="menu-title" onclick="toggle(this)">🍝 SPA (Spaghetti)</div>
+
+<div class="menu-items">
+
+<div class="two-columns">
+
+<!-- PRODUITS -->
+<div class="column">
+
+<div class="menu-title" onclick="toggle(this)" style="background:#444;font-size:14px;">
+📦 Produits
+</div>
+
+<div class="menu-items">
+
+<div class="item">
+Spa rognons 1000
+<div class="qty">
+<button onclick="removeItem('Spa rognons',1000)">-</button>
+<button onclick="add('Spa rognons',1000)">+</button>
+</div>
+</div>
+
+<div class="item">
+Spa poulet 2500
+<div class="qty">
+<button onclick="removeItem('Spa poulet',2500)">-</button>
+<button onclick="add('Spa poulet',2500)">+</button>
+</div>
+</div>
+
+<div class="item">
+Spa dindon 3500
+<div class="qty">
+<button onclick="removeItem('Spa dindon',3500)">-</button>
+<button onclick="add('Spa dindon',3500)">+</button>
+</div>
+</div>
+
+<div class="item">
+Spa omelette 1000
+<div class="qty">
+<button onclick="removeItem('Spa omelette',1000)">-</button>
+<button onclick="add('Spa omelette',1000)">+</button>
+</div>
+</div>
+
+<div class="item">
+Spa pâté de bœuf 3000
+<div class="qty">
+<button onclick="removeItem('Spa pâté de bœuf',3000)">-</button>
+<button onclick="add('Spa pâté de bœuf',3000)">+</button>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- OPTIONS -->
+<div class="column">
+
+<div class="menu-title" onclick="toggle(this)" style="background:#444;font-size:14px;">
+⚙️ Options
+</div>
+
+<div class="menu-items">
+
+<div class="item">
+Parmesan 1000
+<div class="qty">
+<button onclick="removeItem('Parmesan',1000)">-</button>
+<button onclick="add('Parmesan',1000)">+</button>
+</div>
+</div>
+
+<div class="item">
+Fromage 1000
+<div class="qty">
+<button onclick="removeItem('Fromage',1000)">-</button>
+<button onclick="add('Fromage',1000)">+</button>
+</div>
+</div>
+
+<div class="item">
+Crème 1000
+<div class="qty">
+<button onclick="removeItem('Crème',1000)">-</button>
+<button onclick="add('Crème',1000)">+</button>
+</div>
+</div>
+
+<div class="item">
+Mayonnaise 200
+<div class="qty">
+<button onclick="removeItem('Mayonnaise',200)">-</button>
+<button onclick="add('Mayonnaise',200)">+</button>
+</div>
+</div>
+
+<div class="item">
+Ketchup 300
+<div class="qty">
+<button onclick="removeItem('Ketchup',300)">-</button>
+<button onclick="add('Ketchup',300)">+</button>
+</div>
+</div>
+
+<div class="item">
+Pain 100
+<div class="qty">
+<button onclick="removeItem('Pain',100)">-</button>
+<button onclick="add('Pain',100)">+</button>
+</div>
+</div>
+
+<div class="item">
+Blanc 0F
+<div class="qty">
+<button onclick="removeItem('Blanc',0)">-</button>
+<button onclick="add('Blanc',0)">+</button>
+</div>
+</div>
+
+<div class="item">
+Rouge 0F
+<div class="qty">
+<button onclick="removeItem('Rouge',0)">-</button>
+<button onclick="add('Rouge',0)">+</button>
+</div>
+</div>
+
+<div class="item">
+Sans piment 0F
+<div class="qty">
+<button onclick="removeItem('Sans piment',0)">-</button>
+<button onclick="add('Sans piment',0)">+</button>
+</div>
+</div>
+
+<div class="item">
+Sans sel 0F
+<div class="qty">
+<button onclick="removeItem('Sans sel',0)">-</button>
+<button onclick="add('Sans sel',0)">+</button>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- GRILLADE -->
+
+<div class="menu-title" onclick="toggle(this)">🔥 GRILLADE</div>
+
+<div class="menu-items">
+
+<div class="item">
+Alloco 1500
+<div class="qty">
+<button onclick="removeItem('Alloco',1500)">-</button>
+<button onclick="add('Alloco',1500)">+</button>
+</div>
+</div>
+
+<div class="item">
+Alloco aux œufs 2000
+<div class="qty">
+<button onclick="removeItem('Alloco aux œufs',2000)">-</button>
+<button onclick="add('Alloco aux œufs',2000)">+</button>
+</div>
+</div>
+
+<div class="item">
+Alloco omelette 2000
+<div class="qty">
+<button onclick="removeItem('Alloco omelette',2000)">-</button>
+<button onclick="add('Alloco omelette',2000)">+</button>
+</div>
+</div>
+
+<div class="item">
+Alloco gésiers 2500
+<div class="qty">
+<button onclick="removeItem('Alloco gésiers',2500)">-</button>
+<button onclick="add('Alloco gésiers',2500)">+</button>
+</div>
+</div>
+
+<div class="item">
+Alloco poulet 3500
+<div class="qty">
+<button onclick="removeItem('Alloco poulet',3500)">-</button>
+<button onclick="add('Alloco poulet',3500)">+</button>
+</div>
+</div>
+
+<div class="item">
+Poisson frit (carpe) alloco 5000
+<div class="qty">
+<button onclick="removeItem('Poisson frit carpe alloco',5000)">-</button>
+<button onclick="add('Poisson frit carpe alloco',5000)">+</button>
+</div>
+</div>
+
+<div class="item">
+Poisson frit attiéké 4000
+<div class="qty">
+<button onclick="removeItem('Poisson frit attiéké',4000)">-</button>
+<button onclick="add('Poisson frit attiéké',4000)">+</button>
+</div>
+</div>
+
+</div>
+
+<!-- DABALI -->
+
+<div class="menu-title" onclick="toggle(this)">🍛 DABALI</div>
+
+<div class="menu-items">
+
+<div class="item">
+Riz sauce graine 2500
+<div class="qty">
+<button onclick="removeItem('Riz sauce graine',2500)">-</button>
+<button onclick="add('Riz sauce graine',2500)">+</button>
+</div>
+</div>
+
+<div class="item">
+Placali sauce graine 2500
+<div class="qty">
+<button onclick="removeItem('Placali sauce graine',2500)">-</button>
+<button onclick="add('Placali sauce graine',2500)">+</button>
+</div>
+</div>
+
+<div class="item">
+Placali sauce gombo 2000
+<div class="qty">
+<button onclick="removeItem('Placali sauce gombo',2000)">-</button>
+<button onclick="add('Placali sauce gombo',2000)">+</button>
+</div>
+</div>
+
+<div class="item">
+Placali sauce tomate 2000
+<div class="qty">
+<button onclick="removeItem('Placali sauce tomate',2000)">-</button>
+<button onclick="add('Placali sauce tomate',2000)">+</button>
+</div>
+</div>
+
+</div>
+
+<!-- BOUILLIE -->
+
+<div class="menu-title" onclick="toggle(this)">🥣 BOUILLIE</div>
+
+<div class="menu-items">
+
+<div class="item">
+Banane bouillie au poulet 3000
+<div class="qty">
+<button onclick="removeItem('Banane bouillie au poulet',3000)">-</button>
+<button onclick="add('Banane bouillie au poulet',3000)">+</button>
+</div>
+</div>
+
+<div class="item">
+Banane bouillie viande de bœuf 3000
+<div class="qty">
+<button onclick="removeItem('Banane bouillie viande de bœuf',3000)">-</button>
+<button onclick="add('Banane bouillie viande de bœuf',3000)">+</button>
+</div>
+</div>
+
+<div class="item">
+Banane bouillie langue de bœuf 2500
+<div class="qty">
+<button onclick="removeItem('Banane bouillie langue de bœuf',2500)">-</button>
+<button onclick="add('Banane bouillie langue de bœuf',2500)">+</button>
+</div>
+</div>
+
+<div class="item">
+Banane bouillie poisson frit 4000
+<div class="qty">
+<button onclick="removeItem('Banane bouillie poisson frit',4000)">-</button>
+<button onclick="add('Banane bouillie poisson frit',4000)">+</button>
+</div>
+</div>
+
+<div class="item">
+Igname bouillie poulet frit 4000
+<div class="qty">
+<button onclick="removeItem('Igname bouillie poulet frit',4000)">-</button>
+<button onclick="add('Igname bouillie poulet frit',4000)">+</button>
+</div>
+</div>
+
+<div class="item">
+Igname bouillie dindon 5000
+<div class="qty">
+<button onclick="removeItem('Igname bouillie dindon',5000)">-</button>
+<button onclick="add('Igname bouillie dindon',5000)">+</button>
+</div>
+</div>
+
+<div class="item">
+Igname bouillie poisson frit 5000
+<div class="qty">
+<button onclick="removeItem('Igname bouillie poisson frit',5000)">-</button>
+<button onclick="add('Igname bouillie poisson frit',5000)">+</button>
+</div>
+</div>
+
+</div>
+
+<!-- SOUPE -->
+
+<div class="menu-title" onclick="toggle(this)">🍲 SOUPE</div>
+
+<div class="menu-items">
+
+<div class="item">
+Soupe de poisson 6000
+<div class="qty">
+<button onclick="removeItem('Soupe de poisson',6000)">-</button>
+<button onclick="add('Soupe de poisson',6000)">+</button>
+</div>
+</div>
+
+<div class="item">
+Soupe de poulet 7500
+<div class="qty">
+<button onclick="removeItem('Soupe de poulet',7500)">-</button>
+<button onclick="add('Soupe de poulet',7500)">+</button>
+</div>
+</div>
+
+<div class="item">
+Soupe de pondeuses 9000
+<div class="qty">
+<button onclick="removeItem('Soupe de pondeuses',9000)">-</button>
+<button onclick="add('Soupe de pondeuses',9000)">+</button>
+</div>
+</div>
+
+<div class="item">
+Soupe de mouton 15000
+<div class="qty">
+<button onclick="removeItem('Soupe de mouton',15000)">-</button>
+<button onclick="add('Soupe de mouton',15000)">+</button>
+</div>
+</div>
+
+<div class="item">
+Soupe de rat 9000
+<div class="qty">
+<button onclick="removeItem('Soupe de rat',9000)">-</button>
+<button onclick="add('Soupe de rat',9000)">+</button>
+</div>
+</div>
+
+</div>
+
+<!-- PANIER -->
+
+<div class="cart">
+
+<h3>🛒 Panier</h3>
+
+<ul id="liste"></ul>
+
+<p><strong>Total :</strong> <span id="total">0</span> FCFA</p>
+
+<h4>🚚 Livraison</h4>
+
+<select id="livraison">
+
+<option>J'ai commandé un coursier Yango</option>
+<option>J'ai commandé un coursier Glovo</option>
+<option>J'ai déjà un coursier</option>
+<option>Je viens la récupérer moi-même</option>
+<option>J'ai besoin d'un coursier</option>
+
+</select>
+
+<h4>💳 Paiement</h4>
+
+<select id="paiement" onchange="showNumbers()">
+
+<option value="">-- Choisir --</option>
+<option value="orange">Orange Money</option>
+<option value="mtn">MTN Money</option>
+<option value="wave">Wave</option>
+
+</select>
+
+<div id="paymentNumbers"
+style="font-size:12px;color:#555;margin-top:5px;">
+</div>
+
+<p style="font-size:12px;color:#666;">
+Faites une capture d’écran lorsque vous faites la transaction puis envoyez via WhatsApp.
+</p>
+
+<h4>💬 Commentaire</h4>
+
+<textarea id="commentaire"></textarea>
+
+<button class="btn" onclick="sendWhatsApp()">
+📲 Envoyer WhatsApp
+</button>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+<h2>Contact</h2>
+
+<p>📍 Cocody Les Oscars</p>
+
+<p>
+📞 Service client :
+<a href="tel:+2250555549888">0555549888</a>
+</p>
+
+<p>
+🛵 Service coursier :
+<a href="tel:+2250718900934">0718900934</a>
+</p>
+
+<p>
+⚠️ Réclamation :
+<a href="tel:+2250718900934">0718900934</a>
+</p>
+
+<p style="font-size:12px;color:#666;">
+En cas de réclamation, veuillez communiquer le numéro CMD.
+</p>
+
+<a class="call" href="tel:+225071890034">
+📞 Appeler maintenant
+</a>
+
+<iframe width="100%" height="250"
+src="https://maps.google.com/maps?q=Cocody%20les%20Oscars&output=embed">
+</iframe>
+
+</section>
+
+<footer>
+
+© 2026 RESTO IVOIRE
+
+</footer>
+
+<script>
+
+function openMenu(){
+document.getElementById("overlay").style.right="0";
+}
+
+function closeMenu(){
+document.getElementById("overlay").style.right="-100%";
+}
+
+function showDispo(){
+
+let box=document.getElementById("dispoBox");
+
+box.style.display=
+box.style.display==="block"?"none":"block";
+
+closeMenu();
+
+}
+
+function showPartners(){
+
+let box=document.getElementById("partnersBox");
+
+box.style.display=
+box.style.display==="block"?"none":"block";
+
+closeMenu();
+
+}
+
+let list=[];
+let total=0;
+
+function add(item,price){
+
+list.push(item);
+
+total+=price;
+
+render();
+
+}
+
+function removeItem(item,price){
+
+let i=list.indexOf(item);
+
+if(i>-1){
+
+list.splice(i,1);
+
+total-=price;
+
+if(total<0) total=0;
+
+render();
+
+}
+
+}
+
+function render(){
+
+document.getElementById("liste").innerHTML=
+list.map(i=>"<li>"+i+"</li>").join("");
+
+document.getElementById("total").innerText=total;
+
+}
+
+function toggle(el){
+
+el.nextElementSibling.style.display=
+el.nextElementSibling.style.display==="block"
+?"none":"block";
+
+}
+
+setInterval(()=>{
+
+let s=document.getElementById("scroll");
+
+if(!s)return;
+
+let max=s.scrollWidth-s.clientWidth;
+
+if(s.scrollLeft>=max){
+
+s.scrollTo({left:0,behavior:"smooth"});
+
+}else{
+
+s.scrollLeft+=250;
+
+}
+
+},3000);
+
+function showNumbers(){
+
+let p=document.getElementById("paiement").value;
+
+let box=document.getElementById("paymentNumbers");
+
+if(p==="mtn"){
+
+box.innerHTML="📌 MTN Money : 0555549888";
+
+}
+
+else if(p==="orange"){
+
+box.innerHTML="📌 Orange Money : 0718900934";
+
+}
+
+else if(p==="wave"){
+
+box.innerHTML=
+"📌 Wave : 0718900934<br>📌 Wave : 0555549888";
+
+}
+
+else{
+
+box.innerHTML="";
+
+}
+
+}
+
+function sendWhatsApp(){
+
+if(list.length===0){
+
+alert("Ajoute une commande");
+
+return;
+
+}
+
+let numeroCommande=
+"CMD-"+Date.now()+"-"+Math.floor(Math.random()*1000);
+
+let msg=
+
+"🍽️ COMMANDE RESTO IVOIRE\n\n"+
+
+"🆔 Commande : "+numeroCommande+"\n"+
+
+"🛒 Produits : "+list.join(", ")+"\n"+
+
+"💰 Total : "+total+" FCFA\n"+
+
+"🚚 Livraison : "+
+document.getElementById("livraison").value+"\n"+
+
+"💳 Paiement : "+
+document.getElementById("paiement").value+"\n"+
+
+"💬 Commentaire : "+
+document.getElementById("commentaire").value;
+
+let url=
+"https://wa.me/2250555549888?text="+
+encodeURIComponent(msg);
+
+window.open(url,"_blank");
+
+}
+
+</script>
+
+</body>
+</html>
