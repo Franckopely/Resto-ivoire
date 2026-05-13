@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - Resto Ivoire+</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#050816;
+color:white;
+padding-bottom:50px;
+}
+
+/* HEADER */
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px 8%;
+background:#050816;
+position:sticky;
+top:0;
+z-index:1000;
+border-bottom:1px solid #222;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+font-size:28px;
+font-weight:bold;
+color:#ff8c00;
+}
+
+.logo img{
+width:50px;
+height:50px;
+border-radius:50%;
+object-fit:cover;
+border:2px solid #ff8c00;
+}
+
+/* HERO */
+.hero{
+text-align:center;
+padding:50px 8%;
+}
+
+.hero h1{
+font-size:45px;
+}
+
+.hero span{
+color:#ff8c00;
+}
+
+.description{
+text-align:center;
+max-width:700px;
+margin:auto;
+color:#ccc;
+line-height:1.6;
+padding:0 20px 40px;
+}
+
+/* MENU TITLE */
+.menu-title{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:15px;
+margin:30px 0;
+font-size:24px;
+font-weight:bold;
+color:#ff8c00;
+}
+
+.menu-title::before,
+.menu-title::after{
+content:"";
+height:2px;
+width:70px;
+background:white;
+transition:0.3s;
+}
+
+.menu-title:hover::before,
+.menu-title:hover::after{
+width:100px;
+height:3px;
+}
+
+/* SLIDER ADMIN */
+.slider-admin{
+padding:20px 8%;
+}
+
+.slider-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+.slide-box{
+background:#111827;
+padding:15px;
+border-radius:20px;
+}
+
+.slide-box img{
+width:100%;
+height:250px;
+object-fit:cover;
+border-radius:15px;
+margin-top:10px;
+background:#0b1220;
+}
+
+.slide-box input{
+width:100%;
+margin-top:10px;
+}
+
+/* MAIN SLIDER */
+.main-slider{
+width:90%;
+height:400px;
+margin:30px auto;
+border-radius:25px;
+overflow:hidden;
+background:#111827;
+}
+
+.main-slider img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+/* CATEGORIES */
+.categories{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:15px;
+padding:30px 8%;
+}
+
+.category{
+background:#111827;
+padding:12px 25px;
+border-radius:50px;
+border:1px solid #ff8c00;
+}
+
+/* MENU CARDS */
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+padding:40px 8%;
+}
+
+.card{
+background:#111827;
+border-radius:20px;
+padding:15px;
+transition:0.4s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 0 25px rgba(255,140,0,0.5);
+}
+
+.card img{
+width:100%;
+height:350px;
+object-fit:cover;
+border-radius:15px;
+margin-bottom:10px;
+background:#0b1220;
+}
+
+.card input,
+.card select,
+textarea{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+background:#0b1220;
+color:white;
+}
+
+textarea{
+resize:none;
+height:80px;
+}
+
+/* BUTTON */
+.btn{
+background:#ff8c00;
+color:white;
+padding:12px 20px;
+border:none;
+border-radius:50px;
+cursor:pointer;
+font-weight:bold;
+margin-top:15px;
+width:100%;
+}
+
+/* VIDEOS */
+.video-box video{
+width:100%;
+margin-top:10px;
+border-radius:15px;
+display:none;
+}
+
+/* STATS ADMIN */
+.stats-admin{
+padding:50px 8%;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.stat-box{
+background:#111827;
+padding:25px;
+border-radius:20px;
+}
+
+.stat-box h2{
+color:#ff8c00;
+margin-bottom:15px;
+}
+
+.stat-box input{
+width:100%;
+padding:15px;
+border:none;
+border-radius:10px;
+background:#0b1220;
+color:white;
+font-size:18px;
+}
+
+/* FOOTER */
+footer{
+text-align:center;
+padding:40px;
+color:#999;
+border-top:1px solid #222;
+margin-top:40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">
+
+<img src="https://images.unsplash.com/photo-1607631568010-a87245c0daf8?q=80&w=200&auto=format&fit=crop">
+
+<span>Resto Ivoire+</span>
+
+</div>
+</header>
+
+<section class="hero">
+<h1>Administration <span>du site</span></h1>
+</section>
+
+<div class="description">
+Ajoutez vos images, gérez les catégories et modifiez les statistiques du restaurant.
+</div>
+
+<!-- SLIDER -->
+<div class="menu-title">SLIDER</div>
+
+<section class="slider-admin">
+
+<div class="slider-grid">
+
+<div class="slide-box">
+<input type="file" accept="image/*" onchange="previewSlider(event,this)">
+<img>
+<button class="btn" onclick="publishSlider(this)">Publier</button>
+</div>
+
+<div class="slide-box">
+<input type="file" accept="image/*" onchange="previewSlider(event,this)">
+<img>
+<button class="btn" onclick="publishSlider(this)">Publier</button>
+</div>
+
+<div class="slide-box">
+<input type="file" accept="image/*" onchange="previewSlider(event,this)">
+<img>
+<button class="btn" onclick="publishSlider(this)">Publier</button>
+</div>
+
+<div class="slide-box">
+<input type="file" accept="image/*" onchange="previewSlider(event,this)">
+<img>
+<button class="btn" onclick="publishSlider(this)">Publier</button>
+</div>
+
+<div class="slide-box">
+<input type="file" accept="image/*" onchange="previewSlider(event,this)">
+<img>
+<button class="btn" onclick="publishSlider(this)">Publier</button>
+</div>
+
+</div>
+
+</section>
+
+<!-- MENU -->
+<div class="menu-title">MENU</div>
+
+<section class="categories">
+
+<div class="category">Poulet</div>
+<div class="category">Poisson</div>
+<div class="category">Spaghetti</div>
+<div class="category">Attiéké</div>
+
+</section>
+
+<!-- 10 CASES -->
+<section class="cards">
+
+<div class="card"><img><input type="file" onchange="preview(event,this)"><select><option>Poulet</option><option>Poisson</option><option>Spaghetti</option><option>Attiéké</option></select><input type="text" placeholder="Nom du plat"><textarea placeholder="Description du plat"></textarea><button class="btn">Publier</button></div>
+
+<div class="card"><img><input type="file" onchange="preview(event,this)"><select><option>Poulet</option><option>Poisson</option><option>Spaghetti</option><option>Attiéké</option></select><input type="text" placeholder="Nom du plat"><textarea placeholder="Description du plat"></textarea><button class="btn">Publier</button></div>
+
+<div class="card"><img><input type="file" onchange="preview(event,this)"><select><option>Poulet</option><option>Poisson</option><option>Spaghetti</option><option>Attiéké</option></select><input type="text" placeholder="Nom du plat"><textarea placeholder="Description du plat"></textarea><button class="btn">Publier</button></div>
+
+<div class="card"><img><input type="file" onchange="preview(event,this)"><select><option>Poulet</option><option>Poisson</option><option>Spaghetti</option><option>Attiéké</option></select><input type="text" placeholder="Nom du plat"><textarea placeholder="Description du plat"></textarea><button class="btn">Publier</button></div>
+
+<div class="card"><img><input type="file" onchange="preview(event,this)"><select><option>Poulet</option><option>Poisson</option><option>Spaghetti</option><option>Attiéké</option></select><input type="text" placeholder="Nom du plat"><textarea placeholder="Description du plat"></textarea><button class="btn">Publier</button></div>
+
+<div class="card"><img><input type="file" onchange="preview(event,this)"><select><option>Poulet</option><option>Poisson</option><option>Spaghetti</option><option>Attiéké</option></select><input type="text" placeholder="Nom du plat"><textarea placeholder="Description du plat"></textarea><button class="btn">Publier</button></div>
+
+<div class="card"><img><input type="file" onchange="preview(event,this)"><select><option>Poulet</option><option>Poisson</option><option>Spaghetti</option><option>Attiéké</option></select><input type="text" placeholder="Nom du plat"><textarea placeholder="Description du plat"></textarea><button class="btn">Publier</button></div>
+
+<div class="card"><img><input type="file" onchange="preview(event,this)"><select><option>Poulet</option><option>Poisson</option><option>Spaghetti</option><option>Attiéké</option></select><input type="text" placeholder="Nom du plat"><textarea placeholder="Description du plat"></textarea><button class="btn">Publier</button></div>
+
+<div class="card"><img><input type="file" onchange="preview(event,this)"><select><option>Poulet</option><option>Poisson</option><option>Spaghetti</option><option>Attiéké</option></select><input type="text" placeholder="Nom du plat"><textarea placeholder="Description du plat"></textarea><button class="btn">Publier</button></div>
+
+<div class="card"><img><input type="file" onchange="preview(event,this)"><select><option>Poulet</option><option>Poisson</option><option>Spaghetti</option><option>Attiéké</option></select><input type="text" placeholder="Nom du plat"><textarea placeholder="Description du plat"></textarea><button class="btn">Publier</button></div>
+
+</section>
+
+<!-- VIDEOS PUB -->
+<div class="menu-title">VIDEOS PUB</div>
+
+<section class="slider-admin">
+
+<div class="slider-grid">
+
+<div class="slide-box video-box">
+<label>Importer vidéo</label>
+<input type="file" accept="video/*" onchange="previewVideo(event,this)">
+<video controls></video>
+</div>
+
+<div class="slide-box video-box">
+<label>Importer vidéo</label>
+<input type="file" accept="video/*" onchange="previewVideo(event,this)">
+<video controls></video>
+</div>
+
+<div class="slide-box video-box">
+<label>Importer vidéo</label>
+<input type="file" accept="video/*" onchange="previewVideo(event,this)">
+<video controls></video>
+</div>
+
+</div>
+
+</section>
+
+<!-- STATS -->
+<div class="menu-title">STATISTIQUES</div>
+
+<section class="stats-admin">
+
+<div class="stat-box">
+<h2>Clients satisfaits</h2>
+<input type="number" value="1200">
+</div>
+
+<div class="stat-box">
+<h2>Commandes livrées</h2>
+<input type="number" value="3500">
+</div>
+
+<div class="stat-box">
+<h2>Plats disponibles</h2>
+<input type="number" value="50">
+</div>
+
+</section>
+
+<footer>
+
+© 2026 Resto Ivoire+ — Administration privée
+
+</footer>
+
+<script>
+
+function preview(event,input){
+let img = input.parentElement.querySelector("img");
+img.src = URL.createObjectURL(event.target.files[0]);
+}
+
+let selectedSliderImage = "";
+
+function previewSlider(event,input){
+
+let img = input.parentElement.querySelector("img");
+
+let file = event.target.files[0];
+
+let url = URL.createObjectURL(file);
+
+img.src = url;
+
+selectedSliderImage = url;
+
+}
+
+function publishSlider(button){
+
+if(selectedSliderImage !== ""){
+
+alert("Image publiée sur le slider du site");
+
+}
+
+}
+
+function previewVideo(event,input){
+
+let video = input.parentElement.querySelector("video");
+
+let file = event.target.files[0];
+
+if(file){
+
+let url = URL.createObjectURL(file);
+
+video.src = url;
+
+video.style.display = "block";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
