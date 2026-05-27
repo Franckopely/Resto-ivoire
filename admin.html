@@ -446,29 +446,28 @@ let img = input.parentElement.querySelector("img");
 img.src = URL.createObjectURL(event.target.files[0]);
 }
 
-let selectedSliderImage = "";
+function previewSlider(event, input){
 
-function previewSlider(event,input){
+  const file = event.target.files[0];
 
-let img = input.parentElement.querySelector("img");
+  if(!file) return;
 
-let file = event.target.files[0];
+  const box = input.closest(".slide-box");
 
-let url = URL.createObjectURL(file);
+  const img = box.querySelector("img");
 
-img.src = url;
+  const reader = new FileReader();
 
-selectedSliderImage = url;
+  reader.onload = function(e){
+    img.src = e.target.result;
+  };
 
+  reader.readAsDataURL(file);
 }
 
 function publishSlider(button){
 
-if(selectedSliderImage !== ""){
-
 alert("Image publiée sur le slider du site");
-
-}
 
 }
 
@@ -489,7 +488,6 @@ video.style.display = "block";
 }
 
 }
-
 </script>
   
 <script type="module">
