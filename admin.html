@@ -469,9 +469,39 @@ function previewSlider(event, input){
   reader.readAsDataURL(file);
 }
 
-function publishSlider(button){
+window.publishSlider = async function(button){
 
-alert("Image publiée sur le slider du site");
+let box = button.parentElement;
+
+let input = box.querySelector("input");
+
+let file = input.files[0];
+
+if(!file){
+alert("Choisis une image");
+return;
+}
+
+try{
+
+let storageRef = ref(storage, "slider/" + file.name);
+
+await uploadBytes(storageRef, file);
+
+let url = await getDownloadURL(storageRef);
+
+localStorage.setItem("sliderImage", url);
+
+alert("Image publiée avec succès");
+
+}
+catch(error){
+
+console.log(error);
+
+alert("Erreur publication");
+
+}
 
 }
 
@@ -497,6 +527,13 @@ video.style.display = "block";
 <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+  import {
+getStorage,
+ref,
+uploadBytes,
+getDownloadURL
+}
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-storage.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-analytics.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
@@ -515,6 +552,7 @@ video.style.display = "block";
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
+  const storage = getStorage(app);
   const analytics = getAnalytics(app);
 </script>
   
